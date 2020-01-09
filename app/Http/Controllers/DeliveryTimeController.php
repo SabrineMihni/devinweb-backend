@@ -90,12 +90,11 @@ class DeliveryTimeController extends BaseController
             $date = DeliveryDate::find((int) $date_id);
 
             if($date && ($date->city_id === (int) $city_id)) {
-
                 foreach ($times_id as $time_id) {
 
                     $time = DeliveryTime::find($time_id);
 
-                    if($time->city_id === (int) $city_id && $time->delivery_date_id === (int) $date_id) {
+                    if($time && $time->city_id === (int) $city_id && $time->delivery_date_id === (int) $date_id) {
 
                         $time->excluded = true;
                         $time->save();
