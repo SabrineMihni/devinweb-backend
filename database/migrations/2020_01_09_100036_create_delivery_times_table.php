@@ -16,6 +16,7 @@ class CreateDeliveryTimesTable extends Migration
         Schema::create('delivery_times', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->softDeletes();
             $table->string('delivery_at');
             $table->boolean('excluded');
 

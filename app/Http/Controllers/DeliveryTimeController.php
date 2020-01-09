@@ -61,6 +61,7 @@ class DeliveryTimeController extends BaseController
             $date->excluded = true;
             $times_ids = $date->deliveryTimes->pluck('id');
             DeliveryTime::whereIn('id', $times_ids)->update(['excluded' => true]);
+
             $date->save();
 
         }else {

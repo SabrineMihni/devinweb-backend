@@ -27,7 +27,7 @@ class DeliveryDateController extends BaseController
      */
     public function list($city_id, $days_to_get) {
 
-        return new DeliveryDateCollection(DeliveryDate::where('city_id', $city_id)->with('deliveryTimes')->take($days_to_get)->get());
+        return new DeliveryDateCollection(DeliveryDate::where('city_id', $city_id)->where('excluded',0)->with('deliveryTimes')->take($days_to_get)->get());
 
     }
 

@@ -16,6 +16,7 @@ class CreateDeliveryDatesTable extends Migration
         Schema::create('delivery_dates', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->softDeletes();
             $table->date('date');
             $table->string('day_name', 20);
             $table->boolean('excluded');

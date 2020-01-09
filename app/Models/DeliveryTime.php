@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use App\Scopes\ExcludedScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DeliveryTime extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -15,7 +19,14 @@ class DeliveryTime extends Model
         'delivery_at', 'excluded'
     ];
 
-    protected $hidden = [ 'excluded', 'city_id', "delivery_date_id"];
+    protected $hidden = [ 'excluded', 'city_id', "delivery_date_id", "deleted_at"];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * Get the DeliveryDates for the deliveryTime.
@@ -31,5 +42,17 @@ class DeliveryTime extends Model
     public function city()
     {
         return $this->belongsTo(City::class);
+    }
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new ExcludedScope);
     }
 }

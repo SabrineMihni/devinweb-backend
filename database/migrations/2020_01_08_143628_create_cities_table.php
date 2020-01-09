@@ -18,7 +18,7 @@ class CreateCitiesTable extends Migration
             $table->timestamps();
             $table->string('name', 80)->unique();
             $table->string('slug', 80);
-
+            $table->softDeletes();
         });
     }
 

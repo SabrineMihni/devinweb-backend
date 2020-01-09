@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class City extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -14,6 +17,8 @@ class City extends Model
     protected $fillable = [
         'name', 'slug'
     ];
+
+    protected $hidden = ['deleted_at'];
 
     /**
      * Get the partner.
